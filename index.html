@@ -3,49 +3,1241 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Su Casa Es Mi Casa</title>
+  <title>Su Casa es Mi Casa - Infraestructura Cloud</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background-color: #f7f6f4;
-      font-family: "Poppins", sans-serif;
-      color: #3b2f2f;
-      background-image: url("90b5ec36-c65d-4251-a3ee-b8d0c3a48ce3.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      box-sizing: border-box;
     }
-    .overlay {
-      background: rgba(255, 255, 255, 0.6);
-      padding: 2rem 3rem;
-      border-radius: 20px;
+
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --primary-light: #38bdf8;
+      --secondary: #0c4a6e;
+      --bg-primary: #f0f9ff;
+      --bg-secondary: #e0f2fe;
+      --bg-white: #ffffff;
+      --text-dark: #0c4a6e;
+      --text-medium: #075985;
+      --text-light: #0369a1;
+      --border: #bae6fd;
+      --accent: #7dd3fc;
+      --shadow: rgba(14, 165, 233, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-primary);
+    }
+
+    /* Header Hero */
+    .hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #075985 100%);
+      color: white;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(30deg, transparent 40%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.05) 60%, transparent 60%),
+        linear-gradient(150deg, transparent 40%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.05) 60%, transparent 60%);
+      background-size: 100px 100px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      backdrop-filter: blur(5px);
     }
-    h1 {
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .hero .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.95;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .domain-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Navigation */
+    .nav {
+      background: var(--bg-white);
+      box-shadow: 0 1px 3px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0;
+      justify-content: center;
+    }
+
+    .nav a {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--bg-primary);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-white);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+
+    .card h2 {
+      color: var(--text-dark);
       font-size: 2rem;
-      margin: 0;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--bg-secondary);
+    }
+
+    .card h3 {
+      color: var(--text-medium);
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-medium);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .grid-item {
+      background: var(--bg-primary);
+      padding: 2rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s;
+    }
+
+    .grid-item:hover {
+      border-left-color: var(--primary-dark);
+      transform: translateX(4px);
+      background: var(--bg-secondary);
+    }
+
+    .grid-item h4 {
+      color: var(--text-dark);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .grid-item p {
+      color: var(--text-medium);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 16px var(--shadow);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 300;
+      display: block;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      opacity: 0.9;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    /* Network Diagram */
+    .network-visual {
+      background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+      padding: 2.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .network-visual h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .subnet-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .subnet-box {
+      flex: 1;
+      min-width: 200px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px solid;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .subnet-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px var(--shadow);
+    }
+
+    .subnet-box.ti { border-color: #0284c7; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+    .subnet-box.ing { border-color: #0891b2; background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); }
+    .subnet-box.arq { border-color: #0ea5e9; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+    .subnet-box.render { border-color: #0369a1; background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
+    .subnet-box.internal { border-color: #0c4a6e; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+    .subnet-box.dmz { border-color: #075985; background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
+
+    .subnet-title {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+
+    .subnet-cidr {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      margin-bottom: 0.5rem;
+    }
+
+    .subnet-box small {
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    /* Lists */
+    .service-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .service-list li {
+      padding: 1rem 1.5rem;
+      margin: 0.75rem 0;
+      background: var(--bg-primary);
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+      color: var(--text-medium);
+      transition: all 0.3s;
+    }
+
+    .service-list li:hover {
+      background: var(--bg-secondary);
+      transform: translateX(4px);
+    }
+
+    /* Code Block */
+    .code-block {
+      background: #0c4a6e;
+      color: #e0f2fe;
+      padding: 2rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin: 1.5rem 0;
+      line-height: 1.8;
+      border: 1px solid #075985;
+    }
+
+    .code-block code {
+      color: #7dd3fc;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background: var(--bg-primary);
+    }
+
+    td code {
+      background: var(--bg-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-success { 
+      background: #e0f2fe; 
+      color: #0369a1; 
+      border: 1px solid #7dd3fc;
+    }
+
+    .badge-warning { 
+      background: #bae6fd; 
+      color: #075985; 
+      border: 1px solid #0ea5e9;
+    }
+
+    .badge-danger { 
+      background: #f0f9ff; 
+      color: #0284c7; 
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-info { 
+      background: #f0f9ff; 
+      color: #0c4a6e; 
+      border: 1px solid #7dd3fc;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--secondary);
+      color: white;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      border-top: 3px solid var(--primary);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer h3 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .team-member {
+      background: rgba(255,255,255,0.1);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-links {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .nav a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .card {
+        padding: 2rem 1.5rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Section Labels */
+    .section-label {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 1px;
-    }
-    p {
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
-      font-weight: 300;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>Su Casa Es Mi Casa</h1>
-    <p>Desarrollamos espacios que inspiran — proyectos con alma y arquitectura moderna.</p>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Su Casa es Mi Casa</h1>
+      <p class="subtitle">Infraestructura de Red en la Nube para Empresa de Bienes Raíces</p>
+      <div class="domain-badge">sucasaesmicasa.lat</div>
+    </div>
   </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#overview">Resumen</a>
+      <a href="#architecture">Arquitectura</a>
+      <a href="#subnets">Subredes</a>
+      <a href="#services">Servicios</a>
+      <a href="#security">Seguridad</a>
+      <a href="#deployment">Despliegue AWS</a>
+      <a href="#team">Equipo</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Stats Section -->
+    <div class="stats">
+      <div class="stat-card">
+        <span class="stat-number">6</span>
+        <span class="stat-label">Subredes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">28</span>
+        <span class="stat-label">Usuarios</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">10.0.0.0/16</span>
+        <span class="stat-label">VPC CIDR</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">99.9%</span>
+        <span class="stat-label">Disponibilidad</span>
+      </div>
+    </div>
+
+    <!-- Overview Section -->
+    <section id="overview" class="card">
+      <span class="section-label">Proyecto</span>
+      <h2>Resumen del Proyecto</h2>
+      <p>Diseño e implementación de una infraestructura de red en AWS para una empresa de desarrollo inmobiliario en proceso de construcción de 2 edificios de apartamentos y un condominio de casas.</p>
+      
+      <h3>Objetivos Principales</h3>
+      <ul class="service-list">
+        <li>Red privada segmentada para 15 Arquitectos</li>
+        <li>Red de administración para 3 miembros del equipo de TI</li>
+        <li>Red para 10 Ingenieros de obra</li>
+        <li>Servidores de renderización y almacenamiento de planos</li>
+        <li>Página web pública con información de proyectos</li>
+        <li>Servicios internos: DHCP, NTP, LDAP, DNS</li>
+        <li>Implementación de medidas de seguridad avanzadas</li>
+        <li>VPN para acceso remoto seguro</li>
+      </ul>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="card">
+      <span class="section-label">Diseño</span>
+      <h2>Arquitectura de Red</h2>
+      
+      <div class="network-visual">
+        <h3>Topología de Red VPC</h3>
+        <div class="subnet-group">
+          <div class="subnet-box ti">
+            <div class="subnet-title">TI</div>
+            <div class="subnet-cidr">10.0.1.0/24</div>
+            <small>3 Administradores</small>
+          </div>
+          <div class="subnet-box ing">
+            <div class="subnet-title">Ingenieros</div>
+            <div class="subnet-cidr">10.0.2.0/24</div>
+            <small>10 Usuarios</small>
+          </div>
+          <div class="subnet-box arq">
+            <div class="subnet-title">Arquitectos</div>
+            <div class="subnet-cidr">10.0.3.0/24</div>
+            <small>15 Usuarios</small>
+          </div>
+        </div>
+        <div class="subnet-group">
+          <div class="subnet-box dmz">
+            <div class="subnet-title">DMZ Pública</div>
+            <div class="subnet-cidr">10.0.4.0/24</div>
+            <small>Web, Bastion, NAT</small>
+          </div>
+          <div class="subnet-box render">
+            <div class="subnet-title">Render & Storage</div>
+            <div class="subnet-cidr">10.0.5.0/24</div>
+            <small>Servidores GPU</small>
+          </div>
+          <div class="subnet-box internal">
+            <div class="subnet-title">Servicios Internos</div>
+            <div class="subnet-cidr">10.0.6.0/24</div>
+            <small>LDAP, NTP, DNS</small>
+          </div>
+        </div>
+      </div>
+
+      <h3>Componentes Principales</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <h4>Internet Gateway</h4>
+          <p>Proporciona conexión bidireccional a Internet para recursos públicos ubicados en la DMZ</p>
+        </div>
+        <div class="grid-item">
+          <h4>NAT Gateway</h4>
+          <p>Permite salida segura a Internet para subredes privadas sin exponer recursos internos</p>
+        </div>
+        <div class="grid-item">
+          <h4>AWS Network Firewall</h4>
+          <p>Inspección profunda de tráfico y aplicación de reglas de seguridad avanzadas</p>
+        </div>
+        <div class="grid-item">
+          <h4>VPN Gateway</h4>
+          <p>Acceso remoto seguro mediante túnel cifrado para trabajadores remotos</p>
+        </div>
+        <div class="grid-item">
+          <h4>Route Tables</h4>
+          <p>Tres tablas de enrutamiento personalizadas para segmentación de tráfico</p>
+        </div>
+        <div class="grid-item">
+          <h4>Security Groups</h4>
+          <p>Firewalls virtuales a nivel de instancia con reglas específicas por rol</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subnets Section -->
+    <section id="subnets" class="card">
+      <span class="section-label">Networking</span>
+      <h2>Segmentación de Subredes</h2>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Subred</th>
+              <th>CIDR</th>
+              <th>Hosts Disponibles</th>
+              <th>Propósito</th>
+              <th>Acceso Internet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-info">TI</span></td>
+              <td><code>10.0.1.0/24</code></td>
+              <td>251</td>
+              <td>Administración y gestión completa de infraestructura</td>
+              <td><span class="badge badge-success">Vía NAT</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-info">Ingenieros</span></td>
+              <td><code>10.0.2.0/24</code></td>
+              <td>251</td>
+              <td>Consulta de planos en modo solo lectura</td>
+              <td><span class="badge badge-danger">Bloqueado</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-info">Arquitectos</span></td>
+              <td><code>10.0.3.0/24</code></td>
+              <td>251</td>
+              <td>Diseño, edición y renderizado de proyectos</td>
+              <td><span class="badge badge-success">Vía NAT</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">DMZ</span></td>
+              <td><code>10.0.4.0/24</code></td>
+              <td>251</td>
+              <td>Servicios públicos (Web, Bastion Host)</td>
+              <td><span class="badge badge-success">Directo (IGW)</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-info">Render/Storage</span></td>
+              <td><code>10.0.5.0/24</code></td>
+              <td>251</td>
+              <td>Procesamiento GPU y almacenamiento EFS</td>
+              <td><span class="badge badge-danger">Bloqueado</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-info">Servicios Internos</span></td>
+              <td><code>10.0.6.0/24</code></td>
+              <td>251</td>
+              <td>LDAP, NTP, DNS interno, Intranet</td>
+              <td><span class="badge badge-success">Vía NAT</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cálculo de Subnetting</h3>
+      <p>Todas las subredes utilizan máscara /24, proporcionando 251 direcciones IP utilizables por subred. La VPC principal 10.0.0.0/16 permite hasta 256 subredes /24, ofreciendo amplio margen para crecimiento futuro.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="card">
+      <span class="section-label">Infraestructura</span>
+      <h2>Servicios Implementados</h2>
+      
+      <div class="grid">
+        <div class="grid-item">
+          <h4>LDAP (OpenLDAP)</h4>
+          <p>Directorio centralizado para autenticación y autorización de usuarios en todas las subredes de la organización</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+        <div class="grid-item">
+          <h4>NTP (Chrony)</h4>
+          <p>Sincronización precisa de tiempo utilizando Amazon Time Sync Service (169.254.169.123)</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+        <div class="grid-item">
+          <h4>DNS Interno (dnsmasq)</h4>
+          <p>Resolución de nombres internos integrado con Route53 Private Hosted Zone</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+        <div class="grid-item">
+          <h4>DHCP</h4>
+          <p>Asignación automática de direcciones IP mediante DHCP Options Set de AWS</p>
+          <span class="badge badge-success">Configurado</span>
+        </div>
+        <div class="grid-item">
+          <h4>EFS (Elastic File System)</h4>
+          <p>Sistema de archivos compartido escalable para planos y renders con backups automáticos</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+        <div class="grid-item">
+          <h4>S3 (Simple Storage Service)</h4>
+          <p>Almacenamiento de backups, snapshots y contenido estático del sitio web</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+      </div>
+
+      <h3>Comandos de Verificación</h3>
+      <div class="code-block">
+# Verificar sincronización NTP
+<code>chronyc tracking</code>
+
+# Consultar directorio LDAP
+<code>ldapsearch -x -b "dc=inmobiliaria,dc=local"</code>
+
+# Resolver nombre DNS interno
+<code>nslookup render.inmobiliaria.local</code>
+
+# Verificar montaje de sistema de archivos EFS
+<code>df -h | grep efs</code>
+
+# Listar objetos en bucket S3
+<code>aws s3 ls s3://sucasaesmicasa-backups/</code>
+      </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="card">
+      <span class="section-label">Seguridad</span>
+      <h2>Control de Acceso y Seguridad</h2>
+      
+      <h3>Políticas de Firewall</h3>
+      <ul class="service-list">
+        <li>TI posee acceso administrativo completo a todas las subredes</li>
+        <li>Arquitectos pueden acceder a Render, Storage, Intranet e Internet</li>
+        <li>Ingenieros tienen acceso restringido únicamente a Storage (solo lectura)</li>
+        <li>DMZ completamente aislada, accesible exclusivamente desde Internet público</li>
+        <li>NAT Gateway proporciona salida controlada a Internet para subredes privadas</li>
+        <li>SSH permitido solamente desde Security Group de TI y Bastion Host</li>
+        <li>Hardening aplicado: todos los puertos no utilizados están bloqueados</li>
+        <li>Network ACLs configuradas para doble capa de seguridad</li>
+      </ul>
+
+      <h3>Matriz de Conectividad</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Origen \ Destino</th>
+              <th>TI</th>
+              <th>Arquitectos</th>
+              <th>Ingenieros</th>
+              <th>Render</th>
+              <th>Storage</th>
+              <th>Servicios</th>
+              <th>DMZ</th>
+              <th>Internet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>TI</strong></td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td><strong>Arquitectos</strong></td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td><strong>Ingenieros</strong></td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+            <tr>
+              <td><strong>Render/Storage</strong></td>
+              <td>✗</td>
+              <td>Responde</td>
+              <td>Responde</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+            <tr>
+              <td><strong>Servicios Internos</strong></td>
+              <td>✗</td>
+              <td>Responde</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td><strong>DMZ</strong></td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td><strong>Internet</strong></td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✓ (HTTP/S)</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Medidas de Seguridad Adicionales</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <h4>AWS Client VPN</h4>
+          <p>Túnel VPN cifrado para acceso remoto seguro con autenticación mediante LDAP corporativo</p>
+        </div>
+        <div class="grid-item">
+          <h4>AWS Certificate Manager</h4>
+          <p>Gestión automatizada de certificados SSL/TLS para todos los servicios públicos HTTPS</p>
+        </div>
+        <div class="grid-item">
+          <h4>CloudWatch Logs</h4>
+          <p>Monitoreo continuo y almacenamiento centralizado de logs de seguridad y auditoría</p>
+        </div>
+        <div class="grid-item">
+          <h4>GuardDuty</h4>
+          <p>Detección inteligente de amenazas y análisis de comportamiento anómalo en tiempo real</p>
+        </div>
+        <div class="grid-item">
+          <h4>CloudTrail</h4>
+          <p>Auditoría completa de todas las acciones realizadas en la cuenta de AWS</p>
+        </div>
+        <div class="grid-item">
+          <h4>IAM Policies</h4>
+          <p>Control de acceso granular basado en roles y principio de mínimo privilegio</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deployment Section -->
+    <section id="deployment" class="card">
+      <span class="section-label">Cloud</span>
+      <h2>Despliegue en AWS</h2>
+      
+      <h3>Recursos Desplegados</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <h4>VPC Principal</h4>
+          <p>Red privada virtual con CIDR <code>10.0.0.0/16</code></p>
+          <span class="badge badge-success">Activo</span>
+        </div>
+        <div class="grid-item">
+          <h4>Internet Gateway</h4>
+          <p>Gateway para conectividad bidireccional con Internet público</p>
+          <span class="badge badge-success">Configurado</span>
+        </div>
+        <div class="grid-item">
+          <h4>NAT Gateway</h4>
+          <p>Gateway con Elastic IP para salida segura de subredes privadas</p>
+          <span class="badge badge-success">Operacional</span>
+        </div>
+        <div class="grid-item">
+          <h4>Route Tables</h4>
+          <p>RT-Public, RT-Private-Default, RT-TI con enrutamiento personalizado</p>
+          <span class="badge badge-success">Configuradas</span>
+        </div>
+        <div class="grid-item">
+          <h4>Security Groups</h4>
+          <p>SG-TI, SG-Arq, SG-Ing, SG-Render, SG-Storage, SG-Internal, SG-DMZ</p>
+          <span class="badge badge-success">Implementados</span>
+        </div>
+        <div class="grid-item">
+          <h4>Instancias EC2</h4>
+          <p>12 instancias distribuidas en 6 subredes diferentes</p>
+          <span class="badge badge-success">Ejecutando</span>
+        </div>
+        <div class="grid-item">
+          <h4>Elastic File System</h4>
+          <p>Sistema de archivos compartido con mount targets en múltiples AZ</p>
+          <span class="badge badge-success">Montado</span>
+        </div>
+        <div class="grid-item">
+          <h4>S3 Buckets</h4>
+          <p>Almacenamiento de backups automáticos y contenido estático</p>
+          <span class="badge badge-success">Configurado</span>
+        </div>
+      </div>
+
+      <h3>Almacenamiento y Backup</h3>
+      <ul class="service-list">
+        <li>EFS con políticas de backup automático diarias y retención de 30 días</li>
+        <li>S3 Bucket versionado para almacenamiento de backups y recuperación point-in-time</li>
+        <li>EBS Volumes optimizados para cada instancia EC2 con snapshots programados</li>
+        <li>Lifecycle policies configuradas para transición automática a S3 Glacier</li>
+        <li>Cross-region replication habilitada para disaster recovery</li>
+      </ul>
+
+      <h3>DNS y Certificados</h3>
+      <div class="code-block">
+# Dominio público registrado
+<code>sucasaesmicasa.lat</code> → CloudFront Distribution / ALB en DMZ
+
+# Route 53 Private Hosted Zone (DNS interno)
+Zona: <code>inmobiliaria.local</code>
+
+# Registros A internos configurados:
+render.inmobiliaria.local      → 10.0.5.10
+storage.inmobiliaria.local     → 10.0.5.20
+intranet.inmobiliaria.local    → 10.0.6.10
+ldap.inmobiliaria.local        → 10.0.6.5
+ntp.inmobiliaria.local         → 10.0.6.5
+
+# Certificados SSL/TLS
+ACM Certificate para *.sucasaesmicasa.lat (validado vía DNS)
+      </div>
+
+      <h3>Instancias EC2 Desplegadas</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Subred</th>
+              <th>IP Privada</th>
+              <th>Propósito</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TI-Admin-1</td>
+              <td>t2.micro</td>
+              <td>TI-Subnet</td>
+              <td>10.0.1.10</td>
+              <td>Administración principal</td>
+            </tr>
+            <tr>
+              <td>TI-Admin-2</td>
+              <td>t2.micro</td>
+              <td>TI-Subnet</td>
+              <td>10.0.1.11</td>
+              <td>Administración backup</td>
+            </tr>
+            <tr>
+              <td>Arq-Workstation</td>
+              <td>t2.small</td>
+              <td>Arq-Subnet</td>
+              <td>10.0.3.10</td>
+              <td>Estación de trabajo arquitectos</td>
+            </tr>
+            <tr>
+              <td>Ing-Workstation</td>
+              <td>t2.micro</td>
+              <td>Ing-Subnet</td>
+              <td>10.0.2.10</td>
+              <td>Estación de trabajo ingenieros</td>
+            </tr>
+            <tr>
+              <td>Render-Server</td>
+              <td>t2.medium</td>
+              <td>Render-Storage</td>
+              <td>10.0.5.10</td>
+              <td>Procesamiento de renders</td>
+            </tr>
+            <tr>
+              <td>Storage-Server</td>
+              <td>t2.small</td>
+              <td>Render-Storage</td>
+              <td>10.0.5.20</td>
+              <td>Servidor de almacenamiento</td>
+            </tr>
+            <tr>
+              <td>LDAP-NTP-DNS</td>
+              <td>t2.small</td>
+              <td>Internal-Services</td>
+              <td>10.0.6.5</td>
+              <td>Servicios de directorio y tiempo</td>
+            </tr>
+            <tr>
+              <td>Intranet-Web</td>
+              <td>t2.micro</td>
+              <td>Internal-Services</td>
+              <td>10.0.6.10</td>
+              <td>Servidor web interno</td>
+            </tr>
+            <tr>
+              <td>Public-Web</td>
+              <td>t2.small</td>
+              <td>DMZ-Subnet</td>
+              <td>10.0.4.10</td>
+              <td>Servidor web público</td>
+            </tr>
+            <tr>
+              <td>Bastion-Host</td>
+              <td>t2.micro</td>
+              <td>DMZ-Subnet</td>
+              <td>10.0.4.5</td>
+              <td>Jump server para acceso SSH</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="card">
+      <span class="section-label">Aplicaciones</span>
+      <h2>Casos de Uso Empresariales</h2>
+      
+      <h3>Colaboración en Diseño Arquitectónico</h3>
+      <p>Los 15 arquitectos trabajan simultáneamente en proyectos BIM almacenados en EFS. Acceden de forma segura mediante VPN desde cualquier ubicación, permitiendo trabajo remoto sin comprometer la seguridad de los proyectos confidenciales.</p>
+      <ul class="service-list">
+        <li>Acceso concurrente a planos 3D mediante EFS con baja latencia</li>
+        <li>Control de versiones automático para prevenir pérdidas de trabajo</li>
+        <li>Renderizado en servidores dedicados liberando recursos locales</li>
+        <li>Sincronización en tiempo real entre equipos distribuidos</li>
+      </ul>
+
+      <h3>Supervisión de Obra por Ingenieros</h3>
+      <p>Los 10 ingenieros consultan planos actualizados desde obra mediante dispositivos móviles conectados a VPN. El acceso es estrictamente de solo lectura, garantizado por Security Groups y NACLs.</p>
+      <ul class="service-list">
+        <li>Visualización de planos siempre actualizados desde campo</li>
+        <li>Reducción de errores constructivos por uso de versiones obsoletas</li>
+        <li>Acceso controlado mediante autenticación LDAP corporativa</li>
+        <li>Logs de auditoría de todos los accesos a documentos</li>
+      </ul>
+
+      <h3>Gestión Centralizada por TI</h3>
+      <p>El equipo de 3 técnicos administra toda la infraestructura mediante CloudWatch, Systems Manager y acceso SSH privilegiado. Monitorean rendimiento, gestionan usuarios en LDAP y mantienen la disponibilidad del sistema.</p>
+      <ul class="service-list">
+        <li>Dashboard unificado de monitoreo con CloudWatch</li>
+        <li>Administración remota sin bastion mediante Systems Manager</li>
+        <li>Gestión centralizada de usuarios y permisos con LDAP</li>
+        <li>Alertas automáticas ante incidentes de seguridad o rendimiento</li>
+      </ul>
+
+      <h3>Promoción Digital de Proyectos</h3>
+      <p>El sitio web público en la DMZ muestra proyectos inmobiliarios con renders de alta calidad. Clientes potenciales pueden explorar propiedades, solicitar información y agendar visitas mediante formularios seguros.</p>
+      <ul class="service-list">
+        <li>Disponibilidad 24/7 con alta disponibilidad mediante ALB</li>
+        <li>Certificado SSL para transmisión segura de datos de clientes</li>
+        <li>CDN para entrega rápida de imágenes y renders pesados</li>
+        <li>Aislamiento completo de la red interna mediante DMZ</li>
+      </ul>
+
+      <h3>Cumplimiento Normativo y Auditoría</h3>
+      <p>La arquitectura implementa controles de seguridad alineados con estándares internacionales para protección de datos empresariales y confidencialidad de proyectos.</p>
+      <ul class="service-list">
+        <li>Encriptación en tránsito y en reposo para todos los datos</li>
+        <li>Logs de auditoría inmutables con CloudTrail</li>
+        <li>Backup automático y disaster recovery probados</li>
+        <li>Segregación de funciones y principio de mínimo privilegio</li>
+      </ul>
+    </section>
+
+    <!-- Testing Section -->
+    <section id="testing" class="card">
+      <span class="section-label">Validación</span>
+      <h2>Pruebas de Conectividad Realizadas</h2>
+      
+      <h3>Resultados de Pruebas</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <h4>TI → Arquitectos</h4>
+          <p>Ping exitoso, SSH funcional, acceso completo verificado</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+        <div class="grid-item">
+          <h4>Arquitectos → Render</h4>
+          <p>Conexión a puerto 20204 y 8080 exitosa, transferencia de archivos OK</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+        <div class="grid-item">
+          <h4>Ingenieros → Render</h4>
+          <p>Conexión bloqueada correctamente por Security Group</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+        <div class="grid-item">
+          <h4>Arquitectos → TI</h4>
+          <p>Acceso denegado según política de seguridad</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+        <div class="grid-item">
+          <h4>Ingenieros → Storage</h4>
+          <p>Montaje NFS exitoso, permisos de solo lectura verificados</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+        <div class="grid-item">
+          <h4>DMZ → Internet</h4>
+          <p>HTTP/HTTPS funcional, certificado SSL válido</p>
+          <span class="badge badge-success">Aprobado</span>
+        </div>
+      </div>
+
+      <h3>Servicios Verificados</h3>
+      <div class="code-block">
+# NTP - Sincronización de tiempo verificada
+Server: 169.254.169.123
+Stratum: 3, Offset: 0.001s ✓
+
+# LDAP - Autenticación funcional
+Base DN: dc=inmobiliaria,dc=local
+Users found: 28 ✓
+
+# DNS - Resolución interna operativa
+render.inmobiliaria.local → 10.0.5.10 ✓
+storage.inmobiliaria.local → 10.0.5.20 ✓
+
+# EFS - Sistema de archivos montado
+/mnt/efs 100GB disponibles ✓
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="card">
+      <span class="section-label">Equipo</span>
+      <h2>Equipo de Desarrollo</h2>
+      <div class="team-members">
+        <div class="team-member">Mónica Alejandra Salvatierra Chacón - 22249</div>
+        <div class="team-member">Derek Fabian Arreaga Kelson - 22537</div>
+        <div class="team-member">Paula Rebeca Barillas Alvarez - 22764</div>
+        <div class="team-member">Gabriel Estuardo García Donis - 21352</div>
+        <div class="team-member">Edwin José Gabriel de Leon García - 22809</div>
+        <div class="team-member">Abby Sofía Donis Agreda - 22440</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Proyecto de Redes en la Nube</h3>
+      <p>Infraestructura empresarial implementada en Amazon Web Services</p>
+      
+      <div class="team-members">
+        <div class="team-member">Mónica Salvatierra - 22249</div>
+        <div class="team-member">Derek Arreaga - 22537</div>
+        <div class="team-member">Paula Barillas - 22764</div>
+        <div class="team-member">Gabriel García - 21352</div>
+        <div class="team-member">Edwin de Leon - 22809</div>
+        <div class="team-member">Abby Donis - 22440</div>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://github.com/paulabaal12/PROY2-REDES" target="_blank">Repositorio GitHub</a>
+        <a href="https://www.canva.com/design/DAG3BjYwg0E/kvO8WJMhJ66MM7Gqke2Whg/edit" target="_blank">Presentación</a>
+        <a href="https://sucasaesmicasa.lat">Dominio Público</a>
+      </div>
+
+      <p style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
+        © 2025 Su Casa es Mi Casa - Proyecto 2 Redes
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
