@@ -1,0 +1,10 @@
+Host ti1
+    HostName 98.80.208.129
+    User ec2-user
+    IdentityFile C:\Users\drkfa\U\REDES\Proyecto-final\key-pairs\ti-key.pem
+
+Host ti2
+    HostName 10.0.1.49
+    User ec2-user
+    IdentityFile C:\Users\drkfa\U\REDES\Proyecto-final\key-pairs\ti-key.pem
+    ProxyJump ti1
