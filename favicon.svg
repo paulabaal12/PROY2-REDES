@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e6f2ff"/>
+      <stop offset="100%" stop-color="#cfeaff"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffb366"/>
+      <stop offset="100%" stop-color="#ff8a4d"/>
+    </linearGradient>
+  </defs>
+  <!-- background circle -->
+  <rect width="64" height="64" rx="12" fill="#0b4a66"/>
+  <!-- house -->
+  <path d="M10 30 L32 14 L54 30 V48 H10 Z" fill="url(#g1)" stroke="#062b3b" stroke-width="1.5"/>
+  <rect x="26" y="34" width="12" height="12" fill="#7db9ff" stroke="#062b3b" stroke-width="1"/>
+  <rect x="16" y="36" width="6" height="8" fill="#dbefff" stroke="#062b3b" stroke-width="0.9"/>
+  <!-- pencil/ruler simplified -->
+  <rect x="42" y="38" width="10" height="3" rx="0.6" fill="url(#g2)" transform="rotate(-25 47 39.5)" stroke="#6b2500" stroke-width="0.6"/>
+  <rect x="38" y="44" width="4" height="12" rx="0.6" fill="#ffd9b3" transform="rotate(-25 40 50)" stroke="#6b2500" stroke-width="0.6"/>
+  <!-- outline -->
+  <path d="M10 30 L32 14 L54 30" fill="none" stroke="#062b3b" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
